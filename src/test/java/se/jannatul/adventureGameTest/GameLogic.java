@@ -1,5 +1,6 @@
 package se.jannatul.adventureGameTest;
-import se.jannatul.adventureGameTest.Model.*;
+import se.jannatul.adventureGame.Model.Burglar;
+import se.jannatul.adventureGame.Model.Resident;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -7,51 +8,49 @@ import static org.junit.Assert.*;
 public class GameLogic {
     @Test
     public void testPunchLowerHealth() {
-        // Arrange: Create instances of Resident and Burglar
-        ResidentTest residentTest = new ResidentTest();
-        BurglarTest burglarTest = new BurglarTest();
+        //  Create instances of Resident and Burglar
+        Burglar burglar = new Burglar("burglar", 10, 10);
+        Resident resident = new Resident("resident", 10, 10);
 
-        int startHealth = burglarTest.getHealth();
-        int HealthAfterPunch = startHealth - residentTest.getDamage();
+        //Store the starting health of the burglar before the punch
+        int startHealth = burglar.getHealth();
+        // Calculate the expected health of the burglar after receiving a punch
+        int HealthAfterPunch = startHealth - resident.getDamage();
 
-        residentTest.punch(burglarTest);
+        resident.punch(burglar);
 
-        assertEquals(HealthAfterPunch, burglarTest.getHealth(), residentTest.getHealth());
+        assertEquals(HealthAfterPunch, burglar.getHealth());
     }
     @Test
     public void testtakehit() {
-        ResidentTest residentTest = new ResidentTest();
-        BurglarTest burglarTest = new BurglarTest();
+        Burglar burglar = new Burglar("burglar", 10, 10);
+        Resident resident = new Resident("resident", 10, 10);
 
-        int startHealth = residentTest.getHealth();
+        int startHealth = resident.getHealth();
 
-        residentTest.takeHit(burglarTest.getDamage());
+        resident.takeHit(burglar.getDamage());
 
-        int expectedHealth = startHealth - burglarTest.getDamage();
-        assertEquals(expectedHealth, residentTest.getHealth());
+        int expectedHealth = startHealth - burglar.getDamage();
+        assertEquals(expectedHealth, resident.getHealth());
     }
+
     @Test
-    public void PersonIsConsciousYes() {
-        ResidentTest residentTest = new ResidentTest();
-        BurglarTest burglarTest = new BurglarTest();
-        int startHealth = burglarTest.getHealth();
+   public void PersonIsConsciousYes() {
+        Burglar burglar = new Burglar("burglar", 10, 5);
+        Resident resident = new Resident("resident", 10, 5);
 
-        residentTest.punch(burglarTest);
-
-        assertTrue(burglarTest.isConscious());
-
+        burglar.takeHit(2);
+        assertTrue(burglar.isConcious());
     }
+
     @Test
     public void PersonIsConsciousNo() {
-        ResidentTest residentTest = new ResidentTest();
-        BurglarTest burglarTest = new BurglarTest();
-        int startHealth = burglarTest.getHealth();
+        Burglar burglar = new Burglar("burglar", 10, 10);
+        Resident resident = new Resident("resident", 10, 10);
 
-        residentTest.punch(burglarTest);
-        residentTest.punch(burglarTest);
-        residentTest.punch(burglarTest);
-        residentTest.punch(burglarTest);
+        burglar.takeHit(burglar.getHealth());
 
-        assertFalse(burglarTest.isConscious());
+        assertFalse(burglar.isConcious());
+
     }
 }

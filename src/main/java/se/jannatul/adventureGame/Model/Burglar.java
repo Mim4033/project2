@@ -8,5 +8,8 @@ public class Burglar extends Entity {
         super("Burglar", 12, 4);
     }
 
+    public Burglar(String role, int health, int damage) {
+        super(role, health, damage);
+    }
 }
 

@@ -33,7 +33,7 @@ public abstract class EntityTest{
         }
     }
 
-    public boolean isConscious() {
-        return this.health > 0;
-    }
+//    public boolean isConscious() {
+//        return this.health > 0;
+//    }
 }

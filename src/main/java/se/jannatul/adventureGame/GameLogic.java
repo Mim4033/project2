@@ -25,10 +25,10 @@ public class GameLogic {
             System.out.println("5. Go to bedroom");
             String choice = scanner.nextLine(); // Get user input for room choice
             try {
-            switch (choice) {
-                case "1":  // Living room case
-                    System.out.println("You are in the Livingroom, the TV is still on");
-                    break;
+                switch (choice) {
+                    case "1":  // Living room case
+                        System.out.println("You are in the Livingroom, the TV is still on");
+                        break;
                     case "2": // Office case
                         if (burglarDefeated) {
                             System.out.println("You use your phone to call the police");
@@ -37,75 +37,76 @@ public class GameLogic {
                             running = false;
                         } else {
                             System.out.println("You are in the Office, you see a phone");
+                            System.out.println("You continue search for the sound");
                         }
                         break;
-                        case "3": // Hall case (where burglar attack)
-                            System.out.println("You are in the Hall, you encounter a burglar");
-                            if (!burglarDefeated) { // Start fight loop if burglar not defeated
-                                System.out.println("Prepare to fight");
-                                System.out.println("Burglar's health: " + burglar.getHealth());
-                                System.out.println("Resident's health: " + resident.getHealth());
+                    case "3": // Hall case (where burglar attack)
+                        System.out.println("You are in the Hall, you encounter a burglar");
+                        if (!burglarDefeated) { // Start fight loop if burglar not defeated
+                            System.out.println("Prepare to fight");
+                            System.out.println("Burglar's health: " + burglar.getHealth());
+                            System.out.println("Resident's health: " + resident.getHealth());
 
-                                // Fight loop
-                                while (resident.isConcious() && burglar.isConcious()) {
-                                    System.out.println("You attack the burglar!");
-                                    resident.punch(burglar); // Resident attacks burglar
-                                    System.out.println("Burglar's health after hit: " + burglar.getHealth());
+                            // Fight loop
+                            while (resident.isConcious() && burglar.isConcious()) {
+                                System.out.println("You attack the burglar!");
+                                resident.punch(burglar); // Resident attacks burglar
+                                System.out.println("Burglar's health after hit: " + burglar.getHealth());
 
-                                    if (burglar.isConcious()){ // If burglar is still conscious, they attack back
-                                        System.out.println("The burglar attacks back!");
-                                        burglar.punch(resident);  // Burglar attacks resident
-                                        System.out.println("Resident's health after hit: " + resident.getHealth());
-                                    }
-                                    if (resident.isConcious()) {
-                                        System.out.println("Burglar is defeated!");
-                                        burglarDefeated = true; // Set burglarDefeated to true to end fight
-                                    } else {
-                                        System.out.println("Resident is defeated!");
-                                        System.out.println("Game Over");
-                                        running = false; // End the game if resident is defeated
-                                    }
+                                if (burglar.isConcious()) { // If burglar is still conscious, they attack back
+                                    System.out.println("The burglar attacks back!");
+                                    burglar.punch(resident);  // Burglar attacks resident
+                                    System.out.println("Resident's health after hit: " + resident.getHealth());
+                                }
+                                if (resident.isConcious()) {
+                                    System.out.println("Burglar is defeated!");
+                                    burglarDefeated = true; // Set burglarDefeated to true to end fight
+                                } else {
+                                    System.out.println("Resident is defeated!");
+                                    System.out.println("Game Over");
+                                    running = false; // End the game if resident is defeated
                                 }
                             }
-                            break;
-                            case "4": // Kitchen case
-                                if (!fryingPanFound) { // Check if frying pan has not been picked up
-                                System.out.println("You are in the Kitchen, you see an frying pan");
-                                System.out.println(" Do you want to pickup the frying pan?");
-                                System.out.println("1. Yes");
-                                System.out.println("2. No");
-                                String fryingPan = scanner.nextLine();
-                                try {
+                        }
+                        break;
+                    case "4": // Kitchen case
+                        if (!fryingPanFound) { // Check if frying pan has not been picked up
+                            System.out.println("You are in the Kitchen, you see an frying pan");
+                            System.out.println(" Do you want to pickup the frying pan?");
+                            System.out.println("y");
+                            System.out.println("n");
+                            String fryingPan = scanner.nextLine();
+                            try {
                                 switch (fryingPan) {
-                                    case "1":
+                                    case "y":
                                         System.out.println("You picked up the frying pan, your damaged is increased by 3");
-                                        fryingPanFound = true; // Set fryingPanFound to true
+
                                         resident.addDamage(3); // Increase resident's damage
+                                        fryingPanFound = true; // Set fryingPanFound to true
+
+                                    System.out.println("Attack the burglar with more damage power");
                                         break;
-                                        case "2":
-                                            System.out.println("You decided not to pick up the frying pan");
-                                            break;
-                                    default:
-                                        System.out.println("Choose 1 or 2");
+                                    case "n":
+                                        System.out.println("You have to fight without frying pan");
+                                        break;
                                 }
-                                } catch (Exception e) {
-                                    System.out.println("Choose 1 or 2");
-                                }
-                                } else {
-                                    System.out.println("You are in the Kitchen, you already have a frying pan");
-                                    break;
-                                }
+                            } catch (Exception e) {
+                                System.out.println("Something went wrong");
+                            }
+                        }
+
                                     case "5": // Bedroom case
                                         System.out.println("You are in the bedroom, light is still on");
                                         break;
-                                        default:
-                                            System.out.println("Choose between 1 to 5"); // Handle invalid input
-            }
-            } catch (Exception e) {  // Catch unexpected exceptions
-                System.out.println("Choose between 1 to 5");
-            }
-        }
-         scanner.close(); // Close the scanner when game ends
-    }
+                                    default:
+                                        System.out.println("Choose between 1 to 5"); // Handle invalid input
+                                }
+                            } catch (Exception e) {  // Catch unexpected exceptions
+                                System.out.println("Choose between 1 to 5");
+                            }
+                        }
+                        scanner.close(); // Close the scanner when game ends
+                }
 
-}
+            }
+
