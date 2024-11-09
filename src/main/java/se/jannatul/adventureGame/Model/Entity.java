@@ -1,5 +1,7 @@
 package se.jannatul.adventureGame.Model;
 
+import java.util.Random;
+
 // Abstract class
 abstract  class Entity {
     private  String role; // Role of the entity (Resident or Burglar)
