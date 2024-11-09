@@ -30,7 +30,7 @@ public class GameLogic {
                         System.out.println("You are in the living room, the TV is still on");
                         break;
                     case "2": // Office case
-                        if (burglarDefeated) {
+                        if (burglarDefeated) { //if burglar is defeated
                             System.out.println("You use your phone to call the police");
                             System.out.println("Police successfully captured the burglar ");
                             System.out.println("You win the game!");
